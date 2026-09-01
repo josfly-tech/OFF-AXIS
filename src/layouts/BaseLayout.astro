@@ -1,0 +1,69 @@
+---
+import '@/styles/global.css';
+
+interface Props {
+  lang: 'en' | 'fr';
+  title: string;
+  description: string;
+  canonicalPath: string;
+  alternatePath: string;
+  alternateLang: 'en' | 'fr';
+  ogImage?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  lang,
+  title,
+  description,
+  canonicalPath,
+  alternatePath,
+  alternateLang,
+  ogImage,
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+const origin = Astro.site ?? new URL('https://www.offaxis.partners');
+const canonical = new URL(canonicalPath, origin);
+const alternate = new URL(alternatePath, origin);
+const socialImage = ogImage ? new URL(ogImage, origin) : undefined;
+const analyticsId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID || 'G-N1LVHW8ZNJ';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#100e0c" />
+    <meta name="color-scheme" content="dark" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="preload" href="/fonts/SchibstedGrotesk.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/SpaceMono-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="alternate" hreflang={alternateLang} href={alternate} />
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={new URL('/', origin)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="OFF AXIS" />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_GB'} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    <meta name="twitter:card" content={socialImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
+    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body data-ga-id={analyticsId}>
+    <a class="skip-link" href="#main">{lang === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a>
+    <slot />
+  </body>
+</html>

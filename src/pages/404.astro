@@ -1,0 +1,20 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+<BaseLayout lang="en" title="Page not found | OFF AXIS" description="The requested page could not be found." canonicalPath="/404/" alternatePath="/404/" alternateLang="fr" noindex>
+  <header class="topbar is-scrolled">
+    <a href="/" class="wordmark" aria-label="OFF AXIS home">OFF<span>/</span>AXIS</a>
+    <nav class="language not-found-language" aria-label="Language"><a href="/" lang="en">EN</a><span>/</span><a href="/fr/" lang="fr">FR</a></nav>
+  </header>
+  <main id="main" class="legal-shell">
+    <div class="container legal-header">
+      <p class="eyebrow">404 / OFF AXIS</p>
+      <h1>Off the line.</h1>
+      <p class="legal-identity">The page you are looking for does not exist.<br />La page que vous recherchez n’existe pas.</p>
+      <div class="not-found-actions">
+        <a class="legal-back" href="/"><span>←</span>English site</a>
+        <a class="legal-back" href="/fr/"><span>←</span>Site français</a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

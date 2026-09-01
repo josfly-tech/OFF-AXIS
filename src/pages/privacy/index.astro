@@ -1,0 +1,10 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import LegalPage from '@/components/LegalPage.astro';
+import { legalContent } from '@/data/legalContent';
+const content = legalContent.en;
+const page = content.privacyPage;
+---
+<BaseLayout lang="en" title={page.metaTitle} description={page.description} canonicalPath={page.canonicalPath} alternatePath={page.alternatePath} alternateLang="fr" noindex>
+  <LegalPage lang="en" homePath={content.homePath} alternatePath={page.alternatePath} alternateLabel={content.alternateLabel} back={content.back} updated={content.updated} identity={content.identity} {page} consent={content.consent} privacyPath="/privacy/" />
+</BaseLayout>

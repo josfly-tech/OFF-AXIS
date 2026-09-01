@@ -1,0 +1,292 @@
+---
+import { Image } from 'astro:assets';
+import heroImage from '@/assets/images/hero-skate.png';
+import bandImage from '@/assets/images/band-festival.png';
+import portraitImage from '@/assets/images/portrait-joseph.jpg';
+import type { SiteContent } from '@/data/content';
+
+interface Props {
+  content: SiteContent;
+}
+
+const { content } = Astro.props;
+const otherLang = content.lang === 'en' ? 'fr' : 'en';
+const formKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
+const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
+---
+
+<div class="intro-screen" aria-hidden="true">
+  <div class="intro-wordmark">OFF<span>/</span>AXIS</div>
+  <div class="intro-track"><i></i></div>
+  <div class="intro-coordinate">N 43.3° · 03.6E · FINDING THE LINE</div>
+</div>
+
+<aside class="axis-rail" aria-label={content.lang === 'fr' ? 'Navigation des sections' : 'Section navigation'}>
+  <span class="rail-brand">OFF / AXIS</span>
+  <div class="rail-spine">
+    <span class="rail-progress"></span>
+    <span class="rail-node"></span>
+    {content.sections.map(([id, label], index) => (
+      <a href={`#${id}`} class="rail-link" data-rail-link data-target={id} style={`--position:${(index / (content.sections.length - 1)) * 100}%`}>
+        <span class="rail-dot"></span>
+        <span class="rail-label"><i>{sectionNumber(index)}</i>{label}</span>
+      </a>
+    ))}
+  </div>
+  <span class="rail-coordinate">N 43.3°</span>
+</aside>
+
+<header class="topbar" data-topbar>
+  <a href={content.homePath} class="wordmark" aria-label="OFF AXIS home">OFF<span>/</span>AXIS</a>
+  <div class="top-actions">
+    <nav class="language" aria-label="Language">
+      <a href="/" lang="en" aria-current={content.lang === 'en' ? 'page' : undefined}>EN</a>
+      <span>/</span>
+      <a href="/fr/" lang="fr" aria-current={content.lang === 'fr' ? 'page' : undefined}>FR</a>
+    </nav>
+    <a class="button button-small" href="#contact">{content.talk} <span>/</span></a>
+  </div>
+  <button class="menu-trigger" type="button" aria-label={content.navLabel} aria-expanded="false" aria-controls="mobile-menu" data-menu-trigger>
+    <span>{content.navLabel}</span><i aria-hidden="true"></i>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label={content.lang === 'fr' ? 'Menu principal' : 'Main menu'} data-mobile-menu>
+  <div class="mobile-menu-links">
+    {content.sections.map(([id, label], index) => (
+      <a href={`#${id}`}><span>{sectionNumber(index)}</span>{label}</a>
+    ))}
+  </div>
+  <div class="mobile-menu-footer">
+    <a href={content.alternatePath} lang={otherLang}>{otherLang.toUpperCase()}</a>
+  </div>
+</nav>
+
+<main id="main" class="site-shell">
+  <section class="hero section" id="top" data-rail-section="top">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">{content.hero.kicker.map((item, index) => <>{index > 0 && <i>·</i>}{item} </>)}</p>
+        <h1>
+          <span><b>{content.hero.line1}</b></span>{' '}
+          <span><b><em>{content.hero.line2a}</em>{content.hero.line2b}</b></span>{' '}
+          <span><b>{content.hero.line3}</b></span>
+        </h1>
+        <p class="lead">{content.hero.lead}</p>
+        <a class="button" href="#contact">{content.talk} <span>/</span></a>
+      </div>
+      <figure class="hero-media reveal">
+        <figcaption>{content.hero.imageTag}</figcaption>
+        <div class="image-frame">
+          <Image src={heroImage} alt={content.hero.imageAlt} widths={[480, 680, 860]} sizes="(min-width: 980px) 38vw, 88vw" format="webp" loading="eager" fetchpriority="high" data-parallax="0.08" />
+        </div>
+      </figure>
+    </div>
+    <div class="scroll-cue" aria-hidden="true"><span></span>{content.hero.scroll}</div>
+  </section>
+
+  <div class="axis-break" aria-hidden="true">
+    <div class="axis-break-inner">
+      <span>{content.axisOne}</span>
+      <div class="moving-axis" data-moving-axis><i></i><i></i><i></i><i></i><b></b></div>
+      <small data-coordinate>N 43.3°</small>
+    </div>
+  </div>
+
+  <section class="section growth-section" id="approach" data-rail-section="approach">
+    <div class="container narrow">
+      <p class="eyebrow reveal"><i>01 /</i> {content.growth.kicker}</p>
+      <h2 class="statement reveal">{content.growth.statementBefore}<em>{content.growth.statementAccent}</em>{content.growth.statementAfter}</h2>
+      <p class="section-lead reveal">{content.growth.lead}</p>
+    </div>
+  </section>
+
+  <section class="section content-section" id="levers" data-rail-section="levers">
+    <div class="container">
+      <header class="section-heading reveal">
+        <span>02</span>
+        <h2>{content.levers.title}</h2>
+        <p>{content.levers.intro}</p>
+      </header>
+      <div class="ledger-list">
+        {content.levers.items.map((item, index) => (
+          <article class="ledger-row reveal">
+            <span>{sectionNumber(index)}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="image-band" aria-label={content.band.textBefore + content.band.accent}>
+    <Image src={bandImage} alt={content.band.imageAlt} widths={[760, 1200, 1800]} sizes="100vw" format="webp" loading="lazy" data-parallax="0.06" />
+    <div class="image-band-overlay container">
+      <h2 class="reveal">{content.band.textBefore}<em>{content.band.accent}</em>.</h2>
+    </div>
+  </section>
+
+  <section class="section content-section" id="fields" data-rail-section="fields">
+    <div class="container">
+      <header class="section-heading reveal">
+        <span>03</span>
+        <h2>{content.fields.title}</h2>
+        <p>{content.fields.intro}</p>
+      </header>
+      <div class="field-grid">
+        {content.fields.items.map((item, index) => (
+          <article class="field-card reveal">
+            <span>{sectionNumber(index)}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section content-section collaborations-section" id="collaborations" data-rail-section="collaborations">
+    <div class="container">
+      <header class="section-heading collaboration-heading reveal">
+        <span>04</span>
+        <h2>{content.collaborations.title}</h2>
+        <p>{content.collaborations.intro}</p>
+      </header>
+      <div class="collaboration-list">
+        <div class="collaboration-row collaboration-stat-row reveal"><strong>500<em>+</em></strong><p>{content.collaborations.stat}</p></div>
+        {content.collaborations.rows.map(([category, names]) => (
+          <div class="collaboration-row reveal"><span>{category}</span><p>{names}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section content-section" id="together" data-rail-section="together">
+    <div class="container">
+      <header class="section-heading reveal">
+        <span>05</span>
+        <h2>{content.together.title}</h2>
+        <p>{content.together.intro}</p>
+      </header>
+      <div class="services-list">
+        {content.together.items.map((item, index) => (
+          <details class="service-row reveal" open={index === 0}>
+            <summary><span>{sectionNumber(index)}</span><h3>{item.title}</h3><i aria-hidden="true"></i></summary>
+            <div class="service-content"><p>{item.text}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section founder-section" id="founder" data-rail-section="founder">
+    <div class="container">
+      <header class="section-heading reveal">
+        <span>06</span>
+        <h2>Joseph Villeflayoux</h2>
+        <p>{content.founder.role}</p>
+      </header>
+      <div class="founder-grid">
+        <figure class="portrait reveal">
+          <Image src={portraitImage} alt={content.founder.imageAlt} widths={[520, 760, 980]} sizes="(min-width: 880px) 42vw, 90vw" format="webp" loading="lazy" data-parallax="0.04" />
+          <figcaption>O<span>/</span>A · FOUNDER</figcaption>
+        </figure>
+        <div class="founder-copy reveal">
+          {content.founder.bio.map((paragraph) => <p>{paragraph}</p>)}
+          <dl class="credentials">
+            <div><dt>{content.founder.fieldLabel}</dt><dd>{content.founder.field}</dd></div>
+            <div><dt>{content.founder.basedLabel}</dt><dd>{content.founder.based}</dd></div>
+          </dl>
+          <a class="mini-link" href="https://www.linkedin.com/in/joseph-villeflayoux-87047040/" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm6 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85V21H9V9z" /></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="recognition reveal">
+        <p>{content.founder.recognition}</p>
+        {content.founder.recognitionItems.map(([label, year, text]) => (
+          <div><span>{label}</span><p><b>{year}</b>{text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="axis-break" aria-hidden="true">
+    <div class="axis-break-inner">
+      <span>{content.axisTwo}</span>
+      <div class="moving-axis" data-moving-axis><i></i><i></i><i></i><i></i><b></b></div>
+      <small data-coordinate>N 43.3°</small>
+    </div>
+  </div>
+
+  <section class="section contact-section" id="contact" data-rail-section="contact">
+    <div class="container">
+      <p class="eyebrow reveal"><i>07 /</i> Contact</p>
+      <h2 class="contact-title reveal">{content.contact.titleBefore}<em>{content.contact.titleAccent}</em>{content.contact.titleAfter}</h2>
+      <p class="contact-lead reveal">{content.contact.lead}</p>
+      <div class="contact-grid reveal">
+        <form
+          class="contact-form"
+          action="https://api.web3forms.com/submit"
+          method="post"
+          data-contact-form
+          data-sending={content.contact.sending}
+          data-success={content.contact.success}
+          data-error={content.contact.error}
+          data-configured={Boolean(formKey)}
+        >
+          <input type="hidden" name="access_key" value={formKey} />
+          <input type="hidden" name="subject" value="New message from www.offaxis.partners" />
+          <input type="hidden" name="from_name" value="OFF AXIS website" />
+          <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" aria-hidden="true" />
+          <label><span>{content.contact.name}</span><input type="text" name="name" autocomplete="name" required /></label>
+          <label><span>{content.contact.email}</span><input type="email" name="email" autocomplete="email" required /></label>
+          <label><span>{content.contact.message}</span><textarea name="message" rows="4" required></textarea></label>
+          <button class="button" type="submit">{content.contact.send} <span>/</span></button>
+          <p class="form-privacy">
+            {content.contact.privacyBefore} <a href={content.privacyPath}>{content.contact.privacyLink}</a>.
+          </p>
+          <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+        </form>
+        <div class="contact-details">
+          <span class="contact-coordinate">N 43.3° · 03.6E</span>
+          <strong>Joseph Villeflayoux</strong>
+          <span>{content.founder.role}</span>
+          <p>{content.contact.location}</p>
+          <p>{content.contact.responseTime}</p>
+          <a href="https://www.linkedin.com/in/joseph-villeflayoux-87047040/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand"><span class="wordmark">OFF<span>/</span>AXIS</span><small>{content.footerTagline}</small></div>
+      <a class="social-link" href="https://www.linkedin.com/in/joseph-villeflayoux-87047040/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm6 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85V21H9V9z" /></svg>
+      </a>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 · N 43.3° · 03.6E</span>
+      <nav aria-label={content.lang === 'fr' ? 'Informations légales' : 'Legal information'}>
+        <a href={content.privacyPath}>{content.privacy}</a>
+        <a href={content.legalPath}>{content.legal}</a>
+      </nav>
+      <nav class="language" aria-label="Language">
+        <a href="/" lang="en" aria-current={content.lang === 'en' ? 'page' : undefined}>EN</a><span>/</span><a href="/fr/" lang="fr" aria-current={content.lang === 'fr' ? 'page' : undefined}>FR</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<aside class="consent-banner" data-consent-banner hidden>
+  <p>{content.consent.text} <a href={content.privacyPath}>{content.consent.learn}</a></p>
+  <div><button type="button" data-consent="denied">{content.consent.reject}</button><button type="button" data-consent="granted">{content.consent.accept}</button></div>
+</aside>
+
+<script src="../scripts/site.ts"></script>

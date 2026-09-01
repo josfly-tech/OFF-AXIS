@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HomePage from '@/components/HomePage.astro';
+import { siteContent } from '@/data/content';
+import { buildStructuredData } from '@/data/structuredData';
+
+const content = siteContent.en;
+---
+
+<BaseLayout
+  lang="en"
+  title={content.title}
+  description={content.description}
+  canonicalPath="/"
+  alternatePath="/fr/"
+  alternateLang="fr"
+  ogImage="/og.png"
+  jsonLd={buildStructuredData('en')}
+>
+  <HomePage {content} />
+</BaseLayout>

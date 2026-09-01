@@ -1,0 +1,16 @@
+{
+  "name": "OFF AXIS",
+  "short_name": "OFF/AXIS",
+  "description": "Strategy, audience, experience and business for sport, outdoor and culture-driven organisations.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#100e0c",
+  "theme_color": "#100e0c",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

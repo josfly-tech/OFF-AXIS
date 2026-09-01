@@ -1,0 +1,59 @@
+---
+interface LegalPageData {
+  title: string;
+  kicker: string;
+  sections: readonly (readonly [string, string])[];
+  otherPath: string;
+}
+
+interface Props {
+  lang: 'en' | 'fr';
+  homePath: string;
+  alternatePath: string;
+  alternateLabel: string;
+  back: string;
+  updated: string;
+  identity: string;
+  page: LegalPageData;
+  consent: { text: string; accept: string; reject: string; learn: string };
+  privacyPath: string;
+}
+
+const { lang, homePath, alternatePath, alternateLabel, back, updated, identity, page, consent, privacyPath } = Astro.props;
+---
+
+<header class="topbar is-scrolled">
+  <a href={homePath} class="wordmark" aria-label="OFF AXIS home">OFF<span>/</span>AXIS</a>
+  <div class="top-actions">
+    <a class="legal-back" href={homePath}><span>←</span>{back}</a>
+    <a class="language" href={alternatePath} lang={lang === 'en' ? 'fr' : 'en'}>{alternateLabel}</a>
+  </div>
+</header>
+
+<main id="main" class="legal-shell">
+  <div class="container">
+    <header class="legal-header">
+      <p class="eyebrow">{page.kicker}</p>
+      <h1>{page.title}</h1>
+      <p class="updated">{updated}</p>
+      <p class="legal-identity" set:html={identity}></p>
+    </header>
+    <article class="legal-document">
+      {page.sections.map(([title, html], index) => (
+        <section>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <h2>{title}</h2>
+          <div set:html={html}></div>
+        </section>
+      ))}
+    </article>
+    <a class="legal-back" href={homePath}><span>←</span>{back}</a>
+  </div>
+</main>
+
+<aside class="consent-banner" data-consent-banner hidden>
+  <p>{consent.text} <a href={privacyPath}>{consent.learn}</a></p>
+  <div><button type="button" data-consent="denied">{consent.reject}</button><button type="button" data-consent="granted">{consent.accept}</button></div>
+</aside>
+
+<script src="../scripts/site.ts"></script>
