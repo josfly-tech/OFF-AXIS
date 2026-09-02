@@ -281,7 +281,7 @@ h1, h2, h3, p, figure, blockquote, dl, dd { margin: 0; }
 .footer-bottom { display: flex; align-items: center; gap: 2rem; padding-top: 1.6rem; color: var(--faint); font: .58rem/1.5 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
 .footer-bottom > nav:first-of-type { display: flex; gap: 1.4rem; margin-left: auto; }
 .footer-bottom a:hover { color: var(--ink); }
-.site-credit { display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap; transition: color .2s; }
+.site-credit { display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap; text-transform: none; transition: color .2s; }
 .site-credit span { opacity: .7; }
 .site-credit b { color: var(--muted); font-weight: 700; letter-spacing: .13em; transition: color .2s; }
 .site-credit i { color: var(--accent); font-style: normal; transition: color .2s, transform .25s var(--ease); }
