@@ -37,7 +37,7 @@ const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
 </aside>
 
 <header class="topbar" data-topbar>
-  <a href={content.homePath} class="wordmark" aria-label="OFF AXIS home">OFF<span>/</span>AXIS</a>
+  <a href={content.homePath} class="wordmark" aria-label={content.lang === 'fr' ? 'OFF/AXIS, accueil' : 'OFF/AXIS, home'}>OFF<span>/</span>AXIS</a>
   <div class="top-actions">
     <nav class="language" aria-label="Language">
       <a href="/" lang="en" aria-current={content.lang === 'en' ? 'page' : undefined}>EN</a>
@@ -277,7 +277,7 @@ const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
         <a href={content.privacyPath}>{content.privacy}</a>
         <a href={content.legalPath}>{content.legal}</a>
       </nav>
-      <a class="site-credit" href="https://unslash.studio/" target="_blank" rel="noopener noreferrer" aria-label="Unslash">
+      <a class="site-credit" href="https://unslash.studio/" target="_blank" rel="noopener noreferrer" aria-label="Forged by ~/Unslash">
         <span>Forged by</span><b>~/Unslash</b><i aria-hidden="true">↗</i>
       </a>
       <nav class="language" aria-label="Language">

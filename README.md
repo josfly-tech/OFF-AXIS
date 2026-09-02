@@ -35,3 +35,21 @@ La commande vérifie les composants Astro, génère les pages EN/FR, optimise le
 ## Render
 
 Le fichier `render.yaml` configure un Static Site Render : commande de build pnpm, publication depuis `dist`, aperçus de pull request, variables publiques du site et en-têtes de sécurité. Dans Render, définir `www.offaxis.partners` comme domaine principal et rattacher également le domaine racine `offaxis.partners` pour sa redirection vers `www`.
+
+La politique CSP est d’abord livrée en mode rapport. Après vérification des rapports et de la console sur le domaine final, elle pourra passer de `Content-Security-Policy-Report-Only` à `Content-Security-Policy`.
+
+## Checklist de mise en ligne
+
+- [ ] `www.offaxis.partners` sert le nouveau site et non la page d’attente.
+- [ ] `offaxis.partners` redirige en 301 vers `www.offaxis.partners`.
+- [ ] Toutes les URL HTTP redirigent en 301 vers HTTPS.
+- [ ] Aucun en-tête `X-Robots-Tag: noindex` n’est présent sur le service de production.
+- [ ] `og.png` est accessible sur le domaine final et son aperçu social est validé.
+- [ ] `sitemap-index.xml` et le sitemap qu’il référence ne contiennent que les pages indexables EN/FR du domaine final, sans URL `onrender.com`.
+- [ ] `robots.txt` référence le sitemap du domaine final.
+- [ ] Les balises `hreflang` EN, FR et `x-default` sont présentes et réciproques.
+- [ ] Un envoi réel du formulaire est reçu et le domaine autorisé est restreint dans Web3Forms.
+- [ ] Les données structurées sont validées avec Schema.org et le Rich Results Test de Google.
+- [ ] Lighthouse est relancé en navigation privée, sans extension, en mobile et desktop sur `/` et `/fr/`.
+
+Le service Render de production et ses aperçus partageant la même configuration, aucun `noindex` global n’est inscrit dans `render.yaml`. Si l’URL `onrender.com` doit rester publique avant la bascule, activer temporairement `X-Robots-Tag: noindex, nofollow` côté Render, puis le retirer impérativement lors du passage en production.

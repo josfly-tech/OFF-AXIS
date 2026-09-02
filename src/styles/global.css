@@ -1,4 +1,48 @@
 @font-face {
+  font-family: 'Schibsted Grotesk Fallback';
+  src: local('Arial'), local('Helvetica Neue');
+  font-style: normal;
+  font-weight: 400 800;
+  size-adjust: 101.69%;
+  ascent-override: 96.03%;
+  descent-override: 25.35%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Schibsted Grotesk Fallback';
+  src: local('Arial Italic'), local('Helvetica Neue Italic');
+  font-style: italic;
+  font-weight: 400 800;
+  size-adjust: 101.69%;
+  ascent-override: 96.03%;
+  descent-override: 25.35%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Space Mono Fallback';
+  src: local('Courier New');
+  font-style: normal;
+  font-weight: 400;
+  size-adjust: 101.98%;
+  ascent-override: 109.83%;
+  descent-override: 35.40%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Space Mono Fallback';
+  src: local('Courier New Bold');
+  font-style: normal;
+  font-weight: 700;
+  size-adjust: 101.98%;
+  ascent-override: 109.83%;
+  descent-override: 35.40%;
+  line-gap-override: 0%;
+}
+
+@font-face {
   font-family: 'Schibsted Grotesk';
   src: url('/fonts/SchibstedGrotesk.woff2') format('woff2');
   font-style: normal;
@@ -42,8 +86,8 @@
   --accent-bright: #c9683c;
   --line: rgba(242, 237, 227, 0.12);
   --line-soft: rgba(242, 237, 227, 0.06);
-  --display: 'Schibsted Grotesk', 'Helvetica Neue', sans-serif;
-  --mono: 'Space Mono', monospace;
+  --display: 'Schibsted Grotesk', 'Schibsted Grotesk Fallback', 'Helvetica Neue', sans-serif;
+  --mono: 'Space Mono', 'Space Mono Fallback', monospace;
   --gutter: clamp(1.35rem, 5vw, 4.4rem);
   --max: 1180px;
   --rail-width: 5.75rem;
@@ -282,7 +326,7 @@ h1, h2, h3, p, figure, blockquote, dl, dd { margin: 0; }
 .footer-bottom > nav:first-of-type { display: flex; gap: 1.4rem; margin-left: auto; }
 .footer-bottom a:hover { color: var(--ink); }
 .site-credit { display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap; text-transform: none; transition: color .2s; }
-.site-credit span { opacity: .7; }
+.site-credit span { color: #8a8377; }
 .site-credit b { color: var(--muted); font-weight: 700; letter-spacing: .13em; transition: color .2s; }
 .site-credit i { color: var(--accent); font-style: normal; transition: color .2s, transform .25s var(--ease); }
 .site-credit:hover b { color: var(--ink); }

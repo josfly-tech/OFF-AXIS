@@ -23,7 +23,7 @@ const { lang, homePath, alternatePath, alternateLabel, back, updated, identity, 
 ---
 
 <header class="topbar is-scrolled">
-  <a href={homePath} class="wordmark" aria-label="OFF AXIS home">OFF<span>/</span>AXIS</a>
+  <a href={homePath} class="wordmark" aria-label={lang === 'fr' ? 'OFF/AXIS, accueil' : 'OFF/AXIS, home'}>OFF<span>/</span>AXIS</a>
   <div class="top-actions">
     <a class="legal-back" href={homePath}><span>←</span>{back}</a>
     <a class="language" href={alternatePath} lang={lang === 'en' ? 'fr' : 'en'}>{alternateLabel}</a>

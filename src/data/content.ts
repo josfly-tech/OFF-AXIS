@@ -167,7 +167,7 @@ export const siteContent = {
       text: 'OFF AXIS uses audience measurement only with your consent.',
       accept: 'Accept',
       reject: 'Decline',
-      learn: 'Learn more',
+      learn: 'Read our privacy policy',
     },
   },
   fr: {
@@ -336,7 +336,7 @@ export const siteContent = {
       text: 'OFF AXIS utilise la mesure d’audience uniquement avec votre accord.',
       accept: 'Accepter',
       reject: 'Refuser',
-      learn: 'En savoir plus',
+      learn: 'Lire notre politique de confidentialité',
     },
   },
 } as const;
