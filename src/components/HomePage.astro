@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import heroImage from '@/assets/images/hero-skate.png';
+import heroImage from '@/assets/images/hero-surf.jpeg';
 import bandImage from '@/assets/images/band-festival.png';
 import portraitImage from '@/assets/images/portrait-joseph.jpg';
 import type { SiteContent } from '@/data/content';
@@ -78,7 +78,7 @@ const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
       <figure class="hero-media reveal">
         <figcaption>{content.hero.imageTag}</figcaption>
         <div class="image-frame">
-          <Image src={heroImage} alt={content.hero.imageAlt} widths={[480, 680, 860]} sizes="(min-width: 980px) 38vw, 88vw" format="webp" loading="eager" fetchpriority="high" data-parallax="0.08" />
+          <Image src={heroImage} alt={content.hero.imageAlt} width={860} widths={[480, 680, 860]} sizes="(min-width: 980px) 38vw, 88vw" format="webp" loading="eager" fetchpriority="high" data-parallax="0.08" />
         </div>
       </figure>
     </div>
