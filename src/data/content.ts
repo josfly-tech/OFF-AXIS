@@ -182,7 +182,7 @@ export const siteContent = {
     navLabel: 'Index',
     talk: 'Parlons-en',
     sections: [
-      ['approach', 'Lignes de croissance'],
+      ['approach', 'Notre approche'],
       ['levers', 'Leviers de croissance'],
       ['fields', 'Terrains de jeu'],
       ['collaborations', 'Collaborations'],
@@ -203,7 +203,7 @@ export const siteContent = {
     },
     axisOne: 'Changer d’angle',
     growth: {
-      kicker: 'Lignes de croissance',
+      kicker: 'Notre approche',
       statementBefore:
         'OFF AXIS aide les événements, destinations et organisations à renforcer leur pertinence, développer leurs audiences et transformer l’attention en ',
       statementAccent: 'valeur concrète',
