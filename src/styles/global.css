@@ -281,6 +281,12 @@ h1, h2, h3, p, figure, blockquote, dl, dd { margin: 0; }
 .footer-bottom { display: flex; align-items: center; gap: 2rem; padding-top: 1.6rem; color: var(--faint); font: .58rem/1.5 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
 .footer-bottom > nav:first-of-type { display: flex; gap: 1.4rem; margin-left: auto; }
 .footer-bottom a:hover { color: var(--ink); }
+.site-credit { display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap; transition: color .2s; }
+.site-credit span { opacity: .7; }
+.site-credit b { color: var(--muted); font-weight: 700; letter-spacing: .13em; transition: color .2s; }
+.site-credit i { color: var(--accent); font-style: normal; transition: color .2s, transform .25s var(--ease); }
+.site-credit:hover b { color: var(--ink); }
+.site-credit:hover i { color: var(--accent-bright); transform: translate(.12rem, -.12rem); }
 
 .consent-banner { position: fixed; z-index: 400; right: 1.25rem; bottom: 1.25rem; width: min(31rem, calc(100% - 2.5rem)); border: 1px solid var(--line); padding: 1.2rem; background: rgba(10,9,8,.97); box-shadow: 0 1.2rem 4rem rgba(0,0,0,.45); }
 .consent-banner[hidden] { display: none; }
