@@ -74,6 +74,7 @@ h1, h2, h3, p, figure, blockquote, dl, dd { margin: 0; }
 .eyebrow { color: var(--muted); font: 400 .68rem/1.7 var(--mono); letter-spacing: .2em; text-transform: uppercase; }
 .eyebrow i { color: var(--accent-bright); font-style: normal; }
 .wordmark { font: 700 1.42rem/1 var(--mono); letter-spacing: .02em; white-space: nowrap; }
+.topbar > .wordmark { font-size: clamp(1.52rem, 1.8vw, 1.68rem); }
 .wordmark > span, .button span, .footer-brand .wordmark span { color: var(--accent-bright); display: inline-block; transition: transform .45s var(--ease), text-shadow .45s; }
 .wordmark:hover > span { transform: rotate(-22deg) scale(1.14); text-shadow: 0 0 1.5rem rgba(201,104,60,.75); }
 .button { display: inline-flex; width: fit-content; align-items: center; justify-content: center; gap: .8rem; margin-top: 2.4rem; border: 1px solid var(--ink); padding: .94rem 1.45rem; font: 700 .7rem/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; transition: color .25s, background .25s, transform .25s, border-color .25s; cursor: pointer; background: transparent; }
