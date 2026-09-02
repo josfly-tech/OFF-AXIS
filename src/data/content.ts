@@ -98,7 +98,7 @@ export const siteContent = {
         ['Brands', 'Red Bull · GoPro · Samsung · G-Shock · Allianz · Heineken · SFR'],
         ['Media', 'Warner Bros Discovery · France TV · Olympic Channel'],
         ['Sport bodies', 'UCI · FIS · FIG · World Skate · IOC'],
-        ['Destinations', 'Val Thorens · Savoie Mont Blanc · Montpellier'],
+        ['Destinations', 'Tignes · Savoie Mont Blanc · Montpellier'],
       ],
     },
     together: {
@@ -267,7 +267,7 @@ export const siteContent = {
         ['Marques', 'Red Bull · GoPro · Samsung · G-Shock · Allianz · Heineken · SFR'],
         ['Médias', 'Warner Bros Discovery · France TV · Olympic Channel'],
         ['Instances', 'UCI · FIS · FIG · World Skate · CIO'],
-        ['Destinations', 'Val Thorens · Savoie Mont Blanc · Montpellier'],
+        ['Destinations', 'Tignes · Savoie Mont Blanc · Montpellier'],
       ],
     },
     together: {
