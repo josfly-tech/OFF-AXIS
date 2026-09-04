@@ -7,7 +7,7 @@ export const siteContent = {
     alternatePath: '/fr/',
     legalPath: '/legal/',
     privacyPath: '/privacy/',
-    title: 'OFF AXIS | Strategy, Audience, Experience & Business',
+    title: 'OFF AXIS | Strategy, Audience, Experience & Growth',
     description:
       'OFF AXIS helps sport, outdoor and culture-driven organisations grow audiences, strengthen positioning and create value, from strategy to execution.',
     navLabel: 'Index',
@@ -22,7 +22,7 @@ export const siteContent = {
       ['contact', 'Contact'],
     ],
     hero: {
-      kicker: ['Strategy', 'Audience', 'Experience', 'Business'],
+      kicker: ['Strategy', 'Audience', 'Experience', 'Growth'],
       line1: 'Find new',
       line2a: 'lines',
       line2b: ' of',
@@ -160,7 +160,7 @@ export const siteContent = {
       privacyBefore: 'Your details are only used to reply. Read our',
       privacyLink: 'privacy policy',
     },
-    footerTagline: 'STRATEGY · AUDIENCE · EXPERIENCE · BUSINESS',
+    footerTagline: 'STRATEGY · AUDIENCE · EXPERIENCE · GROWTH',
     privacy: 'Privacy policy',
     legal: 'Legal notice',
     consent: {
