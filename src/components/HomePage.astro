@@ -78,7 +78,21 @@ const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
       <figure class="hero-media reveal">
         <figcaption>{content.hero.imageTag}</figcaption>
         <div class="image-frame">
-          <Image src={heroImage} alt={content.hero.imageAlt} width={860} widths={[480, 680, 860]} sizes="(min-width: 980px) 38vw, 88vw" format="webp" loading="eager" fetchpriority="high" data-parallax="0.08" />
+          <Image
+            src={heroImage}
+            alt={content.hero.imageAlt}
+            width={2000}
+            height={2875}
+            widths={[480, 680, 860, 1100, 1400, 1800, 2000]}
+            sizes="(min-width: 980px) 38vw, 88vw"
+            format="webp"
+            quality={82}
+            fit="cover"
+            position="center"
+            loading="eager"
+            fetchpriority="high"
+            data-parallax="0.08"
+          />
         </div>
       </figure>
     </div>
