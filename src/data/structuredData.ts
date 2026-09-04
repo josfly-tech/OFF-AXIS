@@ -5,8 +5,8 @@ export const buildStructuredData = (lang: Lang) => {
   const home = lang === 'fr' ? `${origin}/fr/` : `${origin}/`;
   const serviceNames =
     lang === 'fr'
-      ? ['Marketing sportif', 'Stratégie d’audience', 'Expérience fan', 'Sponsoring et partenariats', 'Marketing territorial', 'Sports d’action']
-      : ['Sport marketing', 'Audience strategy', 'Fan experience', 'Sponsorship and partnerships', 'Destination marketing', 'Action sports'];
+      ? ['Marketing sportif', 'Stratégie d’audience', 'Expérience fan', 'Stratégie et structuration de partenariats', 'Pilotage et déploiement de projets', 'Marketing territorial', 'Sports d’action']
+      : ['Sport marketing', 'Audience strategy', 'Fan experience', 'Partnership strategy and structuring', 'Project leadership and delivery', 'Destination marketing', 'Action sports'];
   const awards =
     lang === 'fr'
       ? [
@@ -32,8 +32,8 @@ export const buildStructuredData = (lang: Lang) => {
         image: `${origin}/og.png`,
         description:
           lang === 'fr'
-            ? 'Conseil en stratégie, audience, expérience et croissance pour le sport, l’outdoor et la culture.'
-            : 'Strategy, audience, experience and growth advisory for sport, outdoor and culture-driven organisations.',
+            ? 'Conseil en stratégie, audience, expérience et business pour aider les acteurs du sport, de l’outdoor et de la culture à identifier et concrétiser de nouveaux leviers de croissance.'
+            : 'Strategy, audience, experience and business advisory helping sport, outdoor and culture-driven organisations find and deliver new lines of growth.',
         areaServed: 'Worldwide',
         address: {
           '@type': 'PostalAddress',

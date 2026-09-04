@@ -3,6 +3,8 @@ import { Image } from 'astro:assets';
 import heroImage from '@/assets/images/hero-surf.jpeg';
 import bandImage from '@/assets/images/band-festival.png';
 import portraitImage from '@/assets/images/portrait-joseph.jpg';
+import fiseLogo from '@/assets/images/fise-logo.png';
+import fwtLogo from '@/assets/images/fwt-logo.png';
 import type { SiteContent } from '@/data/content';
 
 interface Props {
@@ -13,6 +15,7 @@ const { content } = Astro.props;
 const otherLang = content.lang === 'en' ? 'fr' : 'en';
 const formKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
 const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
+const selectedWorkLogos = [fiseLogo, fwtLogo];
 ---
 
 <div class="intro-screen" aria-hidden="true">
@@ -44,7 +47,7 @@ const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
       <span>/</span>
       <a href="/fr/" lang="fr" aria-current={content.lang === 'fr' ? 'page' : undefined}>FR</a>
     </nav>
-    <a class="button button-small" href="#contact">{content.talk} <span>/</span></a>
+    <a class="button button-small" href="#contact"><b class="cta-label">{content.talk}</b><small class="cta-hint">{content.talkHint}</small><span>/</span></a>
   </div>
   <button class="menu-trigger" type="button" aria-label={content.navLabel} aria-expanded="false" aria-controls="mobile-menu" data-menu-trigger>
     <span>{content.navLabel}</span><i aria-hidden="true"></i>
@@ -73,7 +76,7 @@ const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
           <span><b>{content.hero.line3}</b></span>
         </h1>
         <p class="lead">{content.hero.lead}</p>
-        <a class="button" href="#contact">{content.talk} <span>/</span></a>
+        <a class="button" href="#contact"><b class="cta-label">{content.talk}</b><small class="cta-hint">{content.talkHint}</small><span>/</span></a>
       </div>
       <figure class="hero-media reveal">
         <figcaption>{content.hero.imageTag}</figcaption>
@@ -111,7 +114,9 @@ const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
     <div class="container narrow">
       <p class="eyebrow reveal"><i>01 /</i> {content.growth.kicker}</p>
       <h2 class="statement reveal">{content.growth.statementBefore}<em>{content.growth.statementAccent}</em>{content.growth.statementAfter}</h2>
-      <p class="section-lead reveal">{content.growth.lead}</p>
+      <div class="section-lead reveal">
+        {content.growth.lead.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
     </div>
   </section>
 
@@ -120,7 +125,6 @@ const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
       <header class="section-heading reveal">
         <span>02</span>
         <h2>{content.levers.title}</h2>
-        <p>{content.levers.intro}</p>
       </header>
       <div class="ledger-list">
         {content.levers.items.map((item, index) => (
@@ -146,7 +150,6 @@ const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
       <header class="section-heading reveal">
         <span>03</span>
         <h2>{content.fields.title}</h2>
-        <p>{content.fields.intro}</p>
       </header>
       <div class="field-grid">
         {content.fields.items.map((item, index) => (
@@ -160,28 +163,11 @@ const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
     </div>
   </section>
 
-  <section class="section content-section collaborations-section" id="collaborations" data-rail-section="collaborations">
-    <div class="container">
-      <header class="section-heading collaboration-heading reveal">
-        <span>04</span>
-        <h2>{content.collaborations.title}</h2>
-        <p>{content.collaborations.intro}</p>
-      </header>
-      <div class="collaboration-list">
-        <div class="collaboration-row collaboration-stat-row reveal"><strong>500<em>+</em></strong><p>{content.collaborations.stat}</p></div>
-        {content.collaborations.rows.map(([category, names]) => (
-          <div class="collaboration-row reveal"><span>{category}</span><p>{names}</p></div>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <section class="section content-section" id="together" data-rail-section="together">
     <div class="container">
       <header class="section-heading reveal">
-        <span>05</span>
+        <span>04</span>
         <h2>{content.together.title}</h2>
-        <p>{content.together.intro}</p>
       </header>
       <div class="services-list">
         {content.together.items.map((item, index) => (
@@ -197,25 +183,58 @@ const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
   <section class="section founder-section" id="founder" data-rail-section="founder">
     <div class="container">
       <header class="section-heading reveal">
-        <span>06</span>
+        <span>05</span>
         <h2>Joseph Villeflayoux</h2>
-        <p>{content.founder.role}</p>
       </header>
       <div class="founder-grid">
         <figure class="portrait reveal">
           <Image src={portraitImage} alt={content.founder.imageAlt} widths={[520, 760, 980]} sizes="(min-width: 880px) 42vw, 90vw" format="webp" loading="lazy" data-parallax="0.04" />
+          <small class="portrait-credit">©Dom Daher / FWT</small>
           <figcaption>O<span>/</span>A · FOUNDER</figcaption>
         </figure>
         <div class="founder-copy reveal">
           {content.founder.bio.map((paragraph) => <p>{paragraph}</p>)}
           <dl class="credentials">
             <div><dt>{content.founder.fieldLabel}</dt><dd>{content.founder.field}</dd></div>
-            <div><dt>{content.founder.basedLabel}</dt><dd>{content.founder.based}</dd></div>
           </dl>
           <a class="mini-link" href="https://www.linkedin.com/in/joseph-villeflayoux-87047040/" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm6 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85V21H9V9z" /></svg>
             LinkedIn
           </a>
+        </div>
+      </div>
+      <section class="selected-work reveal" aria-labelledby={`selected-work-${content.lang}`}>
+        <h3 class="selected-work-label" id={`selected-work-${content.lang}`}>{content.selectedWork.title}</h3>
+        <div class="selected-work-grid">
+          {content.selectedWork.items.map((item, index) => (
+            <article class="selected-work-card">
+              <div class="selected-work-topline">
+                <Image class="selected-work-logo" src={selectedWorkLogos[index]} alt="" loading="lazy" aria-hidden="true" />
+                <div class="selected-work-heading">
+                  <span>{sectionNumber(index)}</span>
+                  <div>
+                    <h4>{item.name}</h4>
+                    <p>{item.role}</p>
+                  </div>
+                </div>
+              </div>
+              <p class="selected-work-copy">{item.text}</p>
+              <ul class="selected-work-metrics" aria-label={`${item.name} — ${content.lang === 'fr' ? 'résultats' : 'results'}`}>
+                {item.metrics.map((metric) => <li>{metric}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+      <div class="career-experience reveal" id="experience">
+        <div class="career-experience-lead">
+          <p class="career-experience-intro">{content.experience.intro}</p>
+          <div class="experience-stat"><strong>500<em>+</em></strong><span>{content.experience.stat}</span></div>
+        </div>
+        <div class="experience-groups">
+          {content.experience.rows.map(([category, names]) => (
+            <div class="experience-group"><span>{category}</span><p>{names}</p></div>
+          ))}
         </div>
       </div>
       <div class="recognition reveal">
@@ -237,7 +256,7 @@ const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
 
   <section class="section contact-section" id="contact" data-rail-section="contact">
     <div class="container">
-      <p class="eyebrow reveal"><i>07 /</i> Contact</p>
+      <p class="eyebrow reveal"><i>06 /</i> Contact</p>
       <h2 class="contact-title reveal">{content.contact.titleBefore}<em>{content.contact.titleAccent}</em>{content.contact.titleAfter}</h2>
       <p class="contact-lead reveal">{content.contact.lead}</p>
       <div class="contact-grid reveal">
@@ -266,9 +285,6 @@ const sectionNumber = (index: number) => String(index + 1).padStart(2, '0');
         </form>
         <div class="contact-details">
           <span class="contact-coordinate">N 43.3° · 03.6E</span>
-          <strong>Joseph Villeflayoux</strong>
-          <span>{content.founder.role}</span>
-          <p>{content.contact.location}</p>
           <p>{content.contact.responseTime}</p>
           <a href="https://www.linkedin.com/in/joseph-villeflayoux-87047040/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
