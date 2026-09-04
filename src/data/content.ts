@@ -172,7 +172,7 @@ export const siteContent = {
       privacyBefore: 'Your details are only used to reply. Read our',
       privacyLink: 'privacy policy',
     },
-    footerTagline: 'STRATEGY · AUDIENCE · EXPERIENCE · BUSINESS',
+    footerTagline: 'STRATEGY · AUDIENCE · EXPERIENCE · GROWTH',
     privacy: 'Privacy policy',
     legal: 'Legal notice',
     consent: {
@@ -353,7 +353,7 @@ export const siteContent = {
       privacyBefore: 'Vos coordonnées sont uniquement utilisées pour vous répondre. Consultez notre',
       privacyLink: 'politique de confidentialité',
     },
-    footerTagline: 'STRATÉGIE · AUDIENCE · EXPÉRIENCE · BUSINESS',
+    footerTagline: 'STRATÉGIE · AUDIENCE · EXPÉRIENCE · GROWTH',
     privacy: 'Politique de confidentialité',
     legal: 'Mentions légales',
     consent: {
