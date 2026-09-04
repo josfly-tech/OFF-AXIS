@@ -127,7 +127,7 @@ export const siteContent = {
       imageAlt: 'Portrait of Joseph Villeflayoux',
       bio: [
         'Twenty years helping sport, outdoor and culture-driven organisations grow audiences, strengthen positioning and create value.',
-        'VP Marketing at Hurricane Group (FISE), Head of Communications at the Freeride World Tour (FIS), IOC consultant on Tokyo 2020 and Paris 2024, with 500+ events and activations led.',
+        'VP Marketing at Hurricane Group (FISE), Head of Communications at the Freeride World Tour (FIS), consultant to Olympic institutions and organising committees across Tokyo 2020 and Paris 2024, with 500+ events and activations led.',
       ],
       fieldLabel: 'Field',
       field: 'Sport · Outdoor · Culture · Events · Destinations',
@@ -309,7 +309,7 @@ export const siteContent = {
       imageAlt: 'Portrait de Joseph Villeflayoux',
       bio: [
         '20 ans à aider des acteurs du sport, de l’outdoor et de la culture à développer leurs audiences, renforcer leur positionnement et créer de la valeur.',
-        'VP Marketing chez Hurricane Group (FISE), Head of Communications du Freeride World Tour (FIS), consultant du CIO sur Tokyo 2020 et Paris 2024, plus de 500 événements et activations menés.',
+        'VP Marketing chez Hurricane Group (FISE), Head of Communications du Freeride World Tour (FIS), consultant auprès des institutions et comités d’organisation olympiques sur Tokyo 2020 et Paris 2024, avec plus de 500 événements et activations menés.',
       ],
       fieldLabel: 'Domaine',
       field: 'Sport · Outdoor · Culture · Événements · Destinations',
