@@ -115,7 +115,10 @@ const selectedWorkLogos = [fiseLogo, fwtLogo];
       <p class="eyebrow reveal"><i>01 /</i> {content.growth.kicker}</p>
       <h2 class="statement reveal">{content.growth.statementBefore}<em>{content.growth.statementAccent}</em>{content.growth.statementAfter}</h2>
       <div class="section-lead reveal">
-        {content.growth.lead.map((paragraph) => <p>{paragraph}</p>)}
+        <p class="section-lead-label">{content.growth.leadLabel}</p>
+        <div class="section-lead-copy">
+          {content.growth.lead.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
       </div>
     </div>
   </section>

@@ -39,6 +39,7 @@ export const siteContent = {
         'OFF AXIS helps events, destinations and organisations strengthen their relevance, grow their audiences and turn attention into ',
       statementAccent: 'tangible value',
       statementAfter: ': participation, engagement, brand value, partnerships and revenue.',
+      leadLabel: 'From strategy to delivery',
       lead: [
         'OFF AXIS structures the path: strategy, positioning, audience insights, roadmap, budgets, content, partnerships and execution.',
         'Senior leadership, close to the teams, aligning stakeholders, bringing in the right expertise and moving projects through to delivery, including partnership structuring and negotiation.',
@@ -220,6 +221,7 @@ export const siteContent = {
         'OFF AXIS aide les événements, destinations et organisations à renforcer leur pertinence, développer leurs audiences et transformer l’attention en ',
       statementAccent: 'valeur concrète',
       statementAfter: ' : participation, engagement, image, partenariats et revenus.',
+      leadLabel: 'De la stratégie au déploiement',
       lead: [
         'OFF AXIS structure le chemin : stratégie, positionnement, insights audience, feuille de route, budgets, contenus, partenariats et exécution.',
         'Un pilotage senior, au plus près des équipes, pour aligner les parties prenantes, mobiliser les bonnes expertises et faire avancer le projet jusqu’au déploiement, y compris dans la structuration et la négociation des partenariats.',
