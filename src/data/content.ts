@@ -15,11 +15,11 @@ export const siteContent = {
     talkHint: 'Get in touch',
     sections: [
       ['approach', 'Lines of growth'],
-      ['levers', 'Growth levers'],
+      ['levers', 'Levers'],
       ['fields', 'Playing fields'],
       ['together', 'Work together'],
       ['founder', 'Founder'],
-      ['contact', 'Contact'],
+      ['contact', 'Drop In'],
     ],
     hero: {
       kicker: ['Strategy', 'Audience', 'Experience', 'Growth'],
@@ -201,7 +201,7 @@ export const siteContent = {
       ['fields', 'Terrains de jeu'],
       ['together', 'Travailler ensemble'],
       ['founder', 'Fondateur'],
-      ['contact', 'Contact'],
+      ['contact', 'Drop In'],
     ],
     hero: {
       kicker: ['Stratégie', 'Audience', 'Expérience', 'Growth'],

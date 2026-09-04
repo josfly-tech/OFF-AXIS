@@ -147,8 +147,7 @@ h1, h2, h3, p, figure, blockquote, dl, dd { margin: 0; }
 .language { display: flex; align-items: center; gap: .45rem; color: var(--faint); font: 400 .68rem/1 var(--mono); letter-spacing: .16em; }
 .language a { transition: color .2s; }
 .language a:hover, .language [aria-current='page'] { color: var(--ink); }
-.menu-trigger { position: relative; width: 4.5rem; display: flex; align-items: center; justify-content: flex-end; gap: .7rem; margin-left: 0; border: 0; padding: .5rem 0; color: var(--muted); background: transparent; cursor: pointer; }
-.menu-trigger > span { font: .64rem/1 var(--mono); letter-spacing: .15em; text-transform: uppercase; }
+.menu-trigger { position: relative; width: 2rem; display: flex; align-items: center; justify-content: flex-end; margin-left: 0; border: 0; padding: .5rem 0; color: var(--muted); background: transparent; cursor: pointer; }
 .menu-trigger i, .menu-trigger i::before { width: 1.5rem; height: 1px; display: block; background: var(--ink); transition: transform .3s var(--ease); }
 .menu-trigger i::before { content: ''; transform: translateY(-.34rem); }
 .menu-trigger[aria-expanded='true'] i { transform: rotate(45deg); }
@@ -426,8 +425,6 @@ h1, h2, h3, p, figure, blockquote, dl, dd { margin: 0; }
 @media (max-width: 480px) {
   :root { --gutter: 1.15rem; }
   .top-actions { gap: .8rem; }
-  .menu-trigger > span { display: none; }
-  .menu-trigger { width: 2rem; }
   .mobile-menu-footer { flex-direction: column; }
   .section-heading { grid-template-columns: 1fr; gap: .8rem; }
   .section-heading > p { grid-column: auto; }
