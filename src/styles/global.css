@@ -353,6 +353,32 @@ h1, h2, h3, p, figure, blockquote, dl, dd { margin: 0; }
 .site-credit:hover b { color: var(--ink); }
 .site-credit:hover i { color: var(--accent-bright); transform: translate(.12rem, -.12rem); }
 
+.soundtrack-player { position: fixed; z-index: 120; right: 1.25rem; bottom: 1.25rem; display: grid; justify-items: end; gap: .55rem; pointer-events: none; }
+.soundtrack-panel { width: min(22rem, calc(100vw - 2.5rem)); overflow: hidden; border: 1px solid var(--line); opacity: 0; visibility: hidden; transform: translateY(.6rem) scale(.985); transform-origin: bottom right; background: rgba(10,9,8,.96); box-shadow: 0 1.2rem 4rem rgba(0,0,0,.45); backdrop-filter: blur(18px); transition: opacity .22s, visibility .22s, transform .32s var(--ease); pointer-events: none; }
+.soundtrack-player.is-open .soundtrack-panel { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
+.soundtrack-panel-header { min-height: 2.7rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .7rem .8rem .65rem 1rem; border-bottom: 1px solid var(--line-soft); }
+.soundtrack-panel-header > span { color: var(--muted); font: 700 .55rem/1 var(--mono); letter-spacing: .13em; white-space: nowrap; }
+.soundtrack-panel-header > span span { color: var(--accent-bright); }
+.soundtrack-panel-header > div { display: flex; align-items: center; gap: .8rem; }
+.soundtrack-panel-header a { color: var(--faint); font: .5rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; transition: color .2s; }
+.soundtrack-panel-header a:hover { color: var(--ink); }
+.soundtrack-panel-header button { width: 1.5rem; height: 1.5rem; display: grid; place-items: center; border: 0; padding: 0; background: transparent; cursor: pointer; }
+.soundtrack-panel-header button i, .soundtrack-panel-header button i::before { width: .85rem; height: 1px; display: block; background: var(--muted); transition: background .2s; }
+.soundtrack-panel-header button i { transform: rotate(45deg); }
+.soundtrack-panel-header button i::before { content: ''; transform: rotate(-90deg); }
+.soundtrack-panel-header button:hover i, .soundtrack-panel-header button:hover i::before { background: var(--ink); }
+.soundtrack-embed { position: relative; height: 152px; display: grid; place-items: center; background: var(--ground-deep); }
+.soundtrack-embed p { color: var(--faint); font: .55rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+.soundtrack-embed iframe { position: absolute; inset: 0; display: block; width: 100%; height: 152px; border: 0; }
+.soundtrack-trigger { min-height: 2.5rem; display: inline-flex; align-items: center; gap: .65rem; border: 1px solid var(--line); padding: .56rem .72rem; color: var(--muted); background: rgba(10,9,8,.84); box-shadow: 0 .7rem 2.2rem rgba(0,0,0,.24); backdrop-filter: blur(14px); font: 700 .54rem/1 var(--mono); letter-spacing: .14em; cursor: pointer; pointer-events: auto; transition: color .2s, border-color .2s, background .2s, transform .25s var(--ease); }
+.soundtrack-trigger:hover, .soundtrack-trigger:focus-visible, .soundtrack-player.is-open .soundtrack-trigger { color: var(--ink); border-color: rgba(201,104,60,.55); background: rgba(26,23,20,.94); }
+.soundtrack-trigger:hover { transform: translateY(-2px); }
+.soundtrack-play { width: 1.15rem; height: 1.15rem; display: grid; place-items: center; border: 1px solid rgba(201,104,60,.65); border-radius: 50%; }
+.soundtrack-play i { width: 0; height: 0; margin-left: .08rem; border-top: .2rem solid transparent; border-bottom: .2rem solid transparent; border-left: .3rem solid var(--accent-bright); }
+.soundtrack-slash { color: var(--accent-bright); font-style: normal; }
+.menu-open .soundtrack-player { opacity: 0; pointer-events: none; }
+.menu-open .soundtrack-player .soundtrack-trigger, .menu-open .soundtrack-player .soundtrack-panel { pointer-events: none; }
+
 .consent-banner { position: fixed; z-index: 400; right: 1.25rem; bottom: 1.25rem; width: min(31rem, calc(100% - 2.5rem)); border: 1px solid var(--line); padding: 1.2rem; background: rgba(10,9,8,.97); box-shadow: 0 1.2rem 4rem rgba(0,0,0,.45); }
 .consent-banner[hidden] { display: none; }
 .consent-banner p { color: var(--muted); font-size: .88rem; }
@@ -424,6 +450,8 @@ h1, h2, h3, p, figure, blockquote, dl, dd { margin: 0; }
 }
 @media (max-width: 480px) {
   :root { --gutter: 1.15rem; }
+  .soundtrack-player { right: .85rem; bottom: .85rem; }
+  .soundtrack-panel { width: calc(100vw - 1.7rem); }
   .top-actions { gap: .8rem; }
   .mobile-menu-footer { flex-direction: column; }
   .section-heading { grid-template-columns: 1fr; gap: .8rem; }

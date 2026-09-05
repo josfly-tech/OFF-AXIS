@@ -145,13 +145,13 @@ export const siteContent = {
         {
           name: 'FISE / Hurricane Group',
           role: 'VP Marketing',
-          text: 'Led strategy, audience growth and commercial development for the world’s biggest action sports event dedicated to youth: positioning, sponsorship, licensing, media rights and ticketing.',
+          text: 'Led brand, audience and growth strategy for FISE / Hurricane Group across communications, sponsorship, media, ticketing, fan engagement and strategic partnerships. Developed and monetised an international ecosystem of action sports properties and events.',
           metrics: ['€15M+ in deals', 'Community grown 0 → 1.5M', '300,000+ on site', 'Team scaled 6 → 110'],
         },
         {
           name: 'Freeride World Tour (FIS)',
           role: 'Head of Communications',
-          text: 'Brand direction, audience, content and media strategy across the Tour’s global ecosystem, alongside its partners and rights holders.',
+          text: 'Led brand, audience growth, fan engagement and media strategy for the Freeride World Tour across its international ecosystem. Developed new formats, digital experiences and distribution opportunities to strengthen the brand platform and support its growth.',
           metrics: ['500M+ global reach (social, digital & broadcast)', '1.8M-fan ecosystem'],
         },
       ],
@@ -327,13 +327,13 @@ export const siteContent = {
         {
           name: 'FISE / Hurricane Group',
           role: 'VP Marketing',
-          text: 'Pilotage de la stratégie, du développement des audiences et du développement commercial du plus grand événement mondial de sports d’action dédié aux jeunes : positionnement, sponsoring, licensing, droits médias et billetterie.',
+          text: 'Direction de la stratégie de marque, d’audience et de croissance de FISE / Hurricane Group, avec un périmètre couvrant communication, sponsoring, médias, billetterie, fan engagement et partenariats stratégiques. Développement et monétisation d’un écosystème international de propriétés et d’événements action sports.',
           metrics: ['15 M€+ de contrats', 'Communauté développée de 0 → 1,5 M', '300 000+ visiteurs sur site', 'Équipe passée de 6 → 110'],
         },
         {
           name: 'Freeride World Tour (FIS)',
           role: 'Head of Communications',
-          text: 'Direction de marque et stratégie audience, contenus et médias à l’échelle de l’écosystème international du Tour, aux côtés de ses partenaires et détenteurs de droits.',
+          text: 'Pilotage de la marque, de la croissance des audiences, du fan engagement et de la stratégie médias du Freeride World Tour à l’échelle internationale. Développement de nouveaux formats, expériences digitales et leviers de distribution au service de la plateforme de marque et de sa croissance.',
           metrics: ['500 M+ de portée mondiale (social, digital et broadcast)', 'Écosystème de 1,8 M de fans'],
         },
       ],

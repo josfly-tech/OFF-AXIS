@@ -1,0 +1,108 @@
+---
+interface Props {
+  lang: 'en' | 'fr';
+}
+
+const { lang } = Astro.props;
+const playlistId = '4EwkAn2s7APExZf1pnkv0I';
+const playlistUrl = `https://open.spotify.com/playlist/${playlistId}`;
+const panelId = `soundtrack-panel-${lang}`;
+const copy = lang === 'fr'
+  ? {
+      playerLabel: 'Playlist OFF AXIS',
+      triggerLabel: 'Écouter la playlist OFF AXIS',
+      closeLabel: 'Fermer le lecteur Spotify',
+      openLabel: 'Ouvrir la playlist dans Spotify',
+      loading: 'Chargement de Spotify…',
+    }
+  : {
+      playerLabel: 'OFF AXIS playlist',
+      triggerLabel: 'Listen to the OFF AXIS playlist',
+      closeLabel: 'Close the Spotify player',
+      openLabel: 'Open the playlist in Spotify',
+      loading: 'Loading Spotify…',
+    };
+---
+
+<aside class="soundtrack-player" data-soundtrack-player data-playlist-id={playlistId} aria-label={copy.playerLabel}>
+  <section class="soundtrack-panel" id={panelId} data-soundtrack-panel aria-hidden="true">
+    <header class="soundtrack-panel-header">
+      <span>OFF<span>/</span>AXIS · SOUNDTRACK</span>
+      <div>
+        <a href={playlistUrl} target="_blank" rel="noopener noreferrer" aria-label={copy.openLabel}>Spotify ↗</a>
+        <button type="button" data-soundtrack-close aria-label={copy.closeLabel}><i aria-hidden="true"></i></button>
+      </div>
+    </header>
+    <div class="soundtrack-embed" data-soundtrack-embed>
+      <p data-soundtrack-status>{copy.loading}</p>
+    </div>
+  </section>
+
+  <button
+    class="soundtrack-trigger"
+    type="button"
+    aria-controls={panelId}
+    aria-expanded="false"
+    aria-label={copy.triggerLabel}
+    data-soundtrack-trigger
+  >
+    <span class="soundtrack-play" aria-hidden="true"><i></i></span>
+    <span>SOUNDTRACK</span>
+    <i class="soundtrack-slash" aria-hidden="true">/</i>
+  </button>
+</aside>
+
+<script>
+  const soundtrackPlayer = document.querySelector<HTMLElement>('[data-soundtrack-player]');
+  const soundtrackTrigger = soundtrackPlayer?.querySelector<HTMLButtonElement>('[data-soundtrack-trigger]');
+  const soundtrackClose = soundtrackPlayer?.querySelector<HTMLButtonElement>('[data-soundtrack-close]');
+  const soundtrackPanel = soundtrackPlayer?.querySelector<HTMLElement>('[data-soundtrack-panel]');
+  const soundtrackEmbed = soundtrackPlayer?.querySelector<HTMLElement>('[data-soundtrack-embed]');
+  const soundtrackStatus = soundtrackPlayer?.querySelector<HTMLElement>('[data-soundtrack-status]');
+
+  const removeSpotifyEmbed = () => {
+    soundtrackEmbed?.querySelector('iframe')?.remove();
+    if (soundtrackStatus) soundtrackStatus.hidden = false;
+  };
+
+  const createSpotifyEmbed = () => {
+    if (!soundtrackEmbed || soundtrackEmbed.querySelector('iframe')) return;
+    const playlistId = soundtrackPlayer?.dataset.playlistId;
+    if (!playlistId) return;
+
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://open.spotify.com/embed/playlist/${encodeURIComponent(playlistId)}?utm_source=generator&theme=0`;
+    iframe.title = soundtrackPlayer?.getAttribute('aria-label') ?? 'Spotify playlist';
+    iframe.width = '100%';
+    iframe.height = '152';
+    iframe.loading = 'lazy';
+    iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.addEventListener('load', () => {
+      if (soundtrackStatus) soundtrackStatus.hidden = true;
+    }, { once: true });
+    soundtrackEmbed.append(iframe);
+  };
+
+  const setSoundtrackOpen = (open: boolean) => {
+    soundtrackPlayer?.classList.toggle('is-open', open);
+    soundtrackTrigger?.setAttribute('aria-expanded', String(open));
+    soundtrackPanel?.setAttribute('aria-hidden', String(!open));
+    if (open) createSpotifyEmbed();
+    else removeSpotifyEmbed();
+  };
+
+  soundtrackTrigger?.addEventListener('click', () => {
+    setSoundtrackOpen(!soundtrackPlayer?.classList.contains('is-open'));
+  });
+  soundtrackClose?.addEventListener('click', () => {
+    setSoundtrackOpen(false);
+    soundtrackTrigger?.focus();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && soundtrackPlayer?.classList.contains('is-open')) {
+      setSoundtrackOpen(false);
+      soundtrackTrigger?.focus();
+    }
+  });
+</script>

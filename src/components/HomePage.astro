@@ -6,6 +6,7 @@ import portraitImage from '@/assets/images/portrait-joseph.jpg';
 import fiseLogo from '@/assets/images/fise-logo.png';
 import fwtLogo from '@/assets/images/fwt-logo.png';
 import type { SiteContent } from '@/data/content';
+import SpotifyPlayer from '@/components/SpotifyPlayer.astro';
 
 interface Props {
   content: SiteContent;
@@ -319,6 +320,8 @@ const selectedWorkLogos = [fiseLogo, fwtLogo];
     </div>
   </div>
 </footer>
+
+<SpotifyPlayer lang={content.lang} />
 
 <aside class="consent-banner" data-consent-banner hidden>
   <p>{content.consent.text} <a href={content.privacyPath}>{content.consent.learn}</a></p>
