@@ -29,7 +29,7 @@ export const siteContent = {
       line3: 'growth.',
       lead: 'Alongside those building the projects, audiences and models that shape sport, outdoor and culture.',
       imageAlt: 'Aerial view of a surfer riding a turquoise wave',
-      imageTag: 'N 43.3° · IN THE FIELD',
+      imageTag: 'N 43.3° · 03.6E',
       scroll: 'Scroll · find the line',
     },
     axisOne: 'A change of angle',

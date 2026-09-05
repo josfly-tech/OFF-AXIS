@@ -14,6 +14,7 @@ const copy = lang === 'fr'
       closeLabel: 'Fermer le lecteur Spotify',
       openLabel: 'Ouvrir la playlist dans Spotify',
       loading: 'Chargement de Spotify…',
+      unavailable: 'Spotify est momentanément indisponible.',
     }
   : {
       playerLabel: 'OFF AXIS playlist',
@@ -21,10 +22,11 @@ const copy = lang === 'fr'
       closeLabel: 'Close the Spotify player',
       openLabel: 'Open the playlist in Spotify',
       loading: 'Loading Spotify…',
+      unavailable: 'Spotify is temporarily unavailable.',
     };
 ---
 
-<aside class="soundtrack-player" data-soundtrack-player data-playlist-id={playlistId} aria-label={copy.playerLabel}>
+<aside class="soundtrack-player" data-soundtrack-player data-playlist-id={playlistId} data-error={copy.unavailable} aria-label={copy.playerLabel}>
   <section class="soundtrack-panel" id={panelId} data-soundtrack-panel aria-hidden="true">
     <header class="soundtrack-panel-header">
       <span>OFF<span>/</span>AXIS · SOUNDTRACK</span>
@@ -34,7 +36,8 @@ const copy = lang === 'fr'
       </div>
     </header>
     <div class="soundtrack-embed" data-soundtrack-embed>
-      <p data-soundtrack-status>{copy.loading}</p>
+      <p data-soundtrack-status data-loading={copy.loading}>{copy.loading}</p>
+      <div data-soundtrack-mount></div>
     </div>
   </section>
 
@@ -53,42 +56,124 @@ const copy = lang === 'fr'
 </aside>
 
 <script>
+  interface SpotifyEmbedController {
+    addListener: (event: 'ready' | 'playback_started' | 'playback_update', callback: (event: { data?: { isPaused?: boolean } }) => void) => void;
+    destroy: () => void;
+    pause: () => void;
+    play: () => void;
+  }
+
+  interface SpotifyIframeApi {
+    createController: (
+      element: HTMLElement,
+      options: { width: string; height: number; url: string },
+      callback: (controller: SpotifyEmbedController) => void,
+    ) => void;
+  }
+
+  type SpotifyWindow = Window & {
+    onSpotifyIframeApiReady?: (api: SpotifyIframeApi) => void;
+  };
+
   const soundtrackPlayer = document.querySelector<HTMLElement>('[data-soundtrack-player]');
   const soundtrackTrigger = soundtrackPlayer?.querySelector<HTMLButtonElement>('[data-soundtrack-trigger]');
   const soundtrackClose = soundtrackPlayer?.querySelector<HTMLButtonElement>('[data-soundtrack-close]');
   const soundtrackPanel = soundtrackPlayer?.querySelector<HTMLElement>('[data-soundtrack-panel]');
   const soundtrackEmbed = soundtrackPlayer?.querySelector<HTMLElement>('[data-soundtrack-embed]');
   const soundtrackStatus = soundtrackPlayer?.querySelector<HTMLElement>('[data-soundtrack-status]');
+  const spotifyWindow = window as SpotifyWindow;
+  let soundtrackController: SpotifyEmbedController | null = null;
+  let spotifyApiPromise: Promise<SpotifyIframeApi> | null = null;
+  let shouldPlayOnReady = false;
 
   const removeSpotifyEmbed = () => {
-    soundtrackEmbed?.querySelector('iframe')?.remove();
-    if (soundtrackStatus) soundtrackStatus.hidden = false;
+    shouldPlayOnReady = false;
+    soundtrackController?.pause();
+    soundtrackController?.destroy();
+    soundtrackController = null;
+    soundtrackEmbed?.querySelectorAll('iframe, [data-soundtrack-mount]').forEach((element) => element.remove());
+    if (soundtrackEmbed) {
+      const mount = document.createElement('div');
+      mount.dataset.soundtrackMount = '';
+      soundtrackEmbed.append(mount);
+    }
+    if (soundtrackStatus) {
+      soundtrackStatus.hidden = false;
+      soundtrackStatus.textContent = soundtrackStatus.dataset.loading ?? soundtrackStatus.textContent;
+    }
+    if (soundtrackPlayer) delete soundtrackPlayer.dataset.playback;
   };
 
-  const createSpotifyEmbed = () => {
-    if (!soundtrackEmbed || soundtrackEmbed.querySelector('iframe')) return;
+  const loadSpotifyApi = () => {
+    if (spotifyApiPromise) return spotifyApiPromise;
+    spotifyApiPromise = new Promise<SpotifyIframeApi>((resolve, reject) => {
+      spotifyWindow.onSpotifyIframeApiReady = (api) => resolve(api);
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://open.spotify.com/embed/iframe-api/v1';
+      script.dataset.spotifyIframeApi = '';
+      script.addEventListener('error', () => reject(new Error('Spotify iFrame API failed to load')), { once: true });
+      document.head.append(script);
+    });
+    return spotifyApiPromise;
+  };
+
+  const createSpotifyEmbed = async () => {
+    if (!soundtrackEmbed || soundtrackController) {
+      if (shouldPlayOnReady) soundtrackController?.play();
+      return;
+    }
     const playlistId = soundtrackPlayer?.dataset.playlistId;
     if (!playlistId) return;
+    const mount = soundtrackEmbed.querySelector<HTMLElement>('[data-soundtrack-mount]');
+    if (!mount) return;
 
-    const iframe = document.createElement('iframe');
-    iframe.src = `https://open.spotify.com/embed/playlist/${encodeURIComponent(playlistId)}?utm_source=generator&theme=0`;
-    iframe.title = soundtrackPlayer?.getAttribute('aria-label') ?? 'Spotify playlist';
-    iframe.width = '100%';
-    iframe.height = '152';
-    iframe.loading = 'lazy';
-    iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
-    iframe.setAttribute('allowfullscreen', '');
-    iframe.addEventListener('load', () => {
-      if (soundtrackStatus) soundtrackStatus.hidden = true;
-    }, { once: true });
-    soundtrackEmbed.append(iframe);
+    try {
+      const api = await loadSpotifyApi();
+      if (!soundtrackPlayer?.classList.contains('is-open')) return;
+      api.createController(
+        mount,
+        {
+          width: '100%',
+          height: 152,
+          url: `https://open.spotify.com/playlist/${playlistId}?utm_source=generator&theme=0`,
+        },
+        (controller) => {
+          if (!soundtrackPlayer?.classList.contains('is-open')) {
+            controller.destroy();
+            return;
+          }
+          soundtrackController = controller;
+          controller.addListener('ready', () => {
+            if (soundtrackStatus) soundtrackStatus.hidden = true;
+            if (shouldPlayOnReady) {
+              controller.play();
+              shouldPlayOnReady = false;
+            }
+          });
+          controller.addListener('playback_started', () => {
+            if (soundtrackPlayer) soundtrackPlayer.dataset.playback = 'playing';
+          });
+          controller.addListener('playback_update', (event) => {
+            if (soundtrackPlayer && typeof event.data?.isPaused === 'boolean') {
+              soundtrackPlayer.dataset.playback = event.data.isPaused ? 'paused' : 'playing';
+            }
+          });
+        },
+      );
+    } catch {
+      if (soundtrackStatus) soundtrackStatus.textContent = soundtrackPlayer?.dataset.error ?? 'Spotify unavailable';
+    }
   };
 
   const setSoundtrackOpen = (open: boolean) => {
     soundtrackPlayer?.classList.toggle('is-open', open);
     soundtrackTrigger?.setAttribute('aria-expanded', String(open));
     soundtrackPanel?.setAttribute('aria-hidden', String(!open));
-    if (open) createSpotifyEmbed();
+    if (open) {
+      shouldPlayOnReady = true;
+      void createSpotifyEmbed();
+    }
     else removeSpotifyEmbed();
   };
 
