@@ -37,7 +37,9 @@ const copy = lang === 'fr'
     </header>
     <div class="soundtrack-embed" data-soundtrack-embed>
       <p data-soundtrack-status data-loading={copy.loading}>{copy.loading}</p>
-      <div data-soundtrack-mount></div>
+      <div class="soundtrack-viewport" data-soundtrack-viewport>
+        <div data-soundtrack-mount></div>
+      </div>
     </div>
   </section>
 
@@ -66,7 +68,7 @@ const copy = lang === 'fr'
   interface SpotifyIframeApi {
     createController: (
       element: HTMLElement,
-      options: { width: string; height: number; url: string },
+      options: { width: string; height: number; uri: string },
       callback: (controller: SpotifyEmbedController) => void,
     ) => void;
   }
@@ -80,6 +82,7 @@ const copy = lang === 'fr'
   const soundtrackClose = soundtrackPlayer?.querySelector<HTMLButtonElement>('[data-soundtrack-close]');
   const soundtrackPanel = soundtrackPlayer?.querySelector<HTMLElement>('[data-soundtrack-panel]');
   const soundtrackEmbed = soundtrackPlayer?.querySelector<HTMLElement>('[data-soundtrack-embed]');
+  const soundtrackViewport = soundtrackPlayer?.querySelector<HTMLElement>('[data-soundtrack-viewport]');
   const soundtrackStatus = soundtrackPlayer?.querySelector<HTMLElement>('[data-soundtrack-status]');
   const spotifyWindow = window as SpotifyWindow;
   let soundtrackController: SpotifyEmbedController | null = null;
@@ -92,10 +95,10 @@ const copy = lang === 'fr'
     soundtrackController?.destroy();
     soundtrackController = null;
     soundtrackEmbed?.querySelectorAll('iframe, [data-soundtrack-mount]').forEach((element) => element.remove());
-    if (soundtrackEmbed) {
+    if (soundtrackViewport) {
       const mount = document.createElement('div');
       mount.dataset.soundtrackMount = '';
-      soundtrackEmbed.append(mount);
+      soundtrackViewport.append(mount);
     }
     if (soundtrackStatus) {
       soundtrackStatus.hidden = false;
@@ -133,11 +136,7 @@ const copy = lang === 'fr'
       if (!soundtrackPlayer?.classList.contains('is-open')) return;
       api.createController(
         mount,
-        {
-          width: '100%',
-          height: 152,
-          url: `https://open.spotify.com/playlist/${playlistId}?utm_source=generator&theme=0`,
-        },
+        { width: '100%', height: 152, uri: `spotify:playlist:${playlistId}` },
         (controller) => {
           if (!soundtrackPlayer?.classList.contains('is-open')) {
             controller.destroy();
