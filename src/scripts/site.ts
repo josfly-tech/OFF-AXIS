@@ -113,7 +113,7 @@ if (!reduceMotion && movingAxes.length) {
     movingAxes.forEach((axis) => {
       axis.style.transform = `rotate(${angle.toFixed(2)}deg)`;
       const coordinate = axis.parentElement?.querySelector<HTMLElement>('[data-coordinate]');
-      if (coordinate) coordinate.textContent = `N ${(43.3 + angle * 0.42).toFixed(1)}°`;
+      if (coordinate) coordinate.textContent = `N ${(43.6 + angle * 0.42).toFixed(1)}°`;
     });
     requestAnimationFrame(animateAxes);
   };
