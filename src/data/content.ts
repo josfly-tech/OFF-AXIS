@@ -7,7 +7,7 @@ export const siteContent = {
     alternatePath: '/fr/',
     legalPath: '/legal/',
     privacyPath: '/privacy/',
-    title: 'OFF AXIS | Strategy, Audience, Experience & Business',
+    title: 'OFF AXIS | Strategy, Audience, Experience & Growth',
     description:
       'OFF AXIS helps sport, outdoor and culture-driven organisations grow audiences, strengthen positioning and create value, from strategy to execution.',
     navLabel: 'Index',
@@ -140,7 +140,7 @@ export const siteContent = {
       ],
     },
     selectedWork: {
-      title: 'Selected work',
+      title: 'Selected experience',
       items: [
         {
           name: 'FISE / Hurricane Group',
@@ -189,7 +189,7 @@ export const siteContent = {
     alternatePath: '/',
     legalPath: '/fr/mentions-legales/',
     privacyPath: '/fr/confidentialite/',
-    title: 'OFF AXIS | Stratégie, Audience, Expérience & Business',
+    title: 'OFF AXIS | Stratégie, Audience, Expérience & Growth',
     description:
       'OFF AXIS aide les acteurs du sport, de l’outdoor et de la culture à développer leurs audiences, renforcer leur positionnement et créer de la valeur.',
     navLabel: 'Index',
