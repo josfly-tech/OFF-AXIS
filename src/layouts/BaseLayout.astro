@@ -24,7 +24,7 @@ const {
   noindex = false,
   jsonLd,
 } = Astro.props;
-const origin = Astro.site ?? new URL('https://www.offaxis.partners');
+const origin = Astro.site ?? new URL('https://offaxis.partners');
 const canonical = new URL(canonicalPath, origin);
 const alternate = new URL(alternatePath, origin);
 const socialImage = ogImage ? new URL(ogImage, origin) : undefined;

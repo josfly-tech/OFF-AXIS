@@ -1,7 +1,7 @@
 import type { Lang } from './content';
 
 export const buildStructuredData = (lang: Lang) => {
-  const origin = 'https://www.offaxis.partners';
+  const origin = 'https://offaxis.partners';
   const home = lang === 'fr' ? `${origin}/fr/` : `${origin}/`;
   const serviceNames =
     lang === 'fr'

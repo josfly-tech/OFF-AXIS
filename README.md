@@ -2,7 +2,7 @@
 
 Site institutionnel bilingue d’OFF AXIS, reconstruit avec Astro et généré en HTML statique.
 
-Le domaine canonique est `https://www.offaxis.partners`.
+Le domaine canonique est `https://offaxis.partners`.
 
 ## Développement local
 
@@ -34,14 +34,14 @@ La commande vérifie les composants Astro, génère les pages EN/FR, optimise le
 
 ## Render
 
-Le fichier `render.yaml` configure un Static Site Render : commande de build pnpm, publication depuis `dist`, aperçus de pull request, variables publiques du site et en-têtes de sécurité. Dans Render, définir `www.offaxis.partners` comme domaine principal et rattacher également le domaine racine `offaxis.partners` pour sa redirection vers `www`.
+Le fichier `render.yaml` configure un Static Site Render : commande de build pnpm, publication depuis `dist`, aperçus de pull request, variables publiques du site et en-têtes de sécurité. Dans Render, définir `offaxis.partners` comme domaine principal et rattacher également `www.offaxis.partners` pour sa redirection vers le domaine racine.
 
 La politique CSP est d’abord livrée en mode rapport. Après vérification des rapports et de la console sur le domaine final, elle pourra passer de `Content-Security-Policy-Report-Only` à `Content-Security-Policy`.
 
 ## Checklist de mise en ligne
 
-- [ ] `www.offaxis.partners` sert le nouveau site et non la page d’attente.
-- [ ] `offaxis.partners` redirige en 301 vers `www.offaxis.partners`.
+- [ ] `offaxis.partners` sert le nouveau site et non la page d’attente.
+- [ ] `www.offaxis.partners` redirige en 301 vers `offaxis.partners`.
 - [ ] Toutes les URL HTTP redirigent en 301 vers HTTPS.
 - [ ] Aucun en-tête `X-Robots-Tag: noindex` n’est présent sur le service de production.
 - [ ] `og.png` est accessible sur le domaine final et son aperçu social est validé.

@@ -27,12 +27,12 @@ Joseph Villeflayoux has twenty years of experience across sport, outdoor, media,
 
 ## Key pages
 
-- [OFF AXIS — English](https://www.offaxis.partners/): Canonical English homepage presenting the advisory, expertise, selected work and founder.
-- [OFF AXIS — Français](https://www.offaxis.partners/fr/): French-language version of the website.
+- [OFF AXIS — English](https://offaxis.partners/): Canonical English homepage presenting the advisory, expertise, selected work and founder.
+- [OFF AXIS — Français](https://offaxis.partners/fr/): French-language version of the website.
 
 ## Optional
 
-- [Privacy policy](https://www.offaxis.partners/privacy/): English privacy information.
-- [Legal notice](https://www.offaxis.partners/legal/): English legal information.
-- [Politique de confidentialité](https://www.offaxis.partners/fr/confidentialite/): French privacy information.
-- [Mentions légales](https://www.offaxis.partners/fr/mentions-legales/): French legal information.
+- [Privacy policy](https://offaxis.partners/privacy/): English privacy information.
+- [Legal notice](https://offaxis.partners/legal/): English legal information.
+- [Politique de confidentialité](https://offaxis.partners/fr/confidentialite/): French privacy information.
+- [Mentions légales](https://offaxis.partners/fr/mentions-legales/): French legal information.
