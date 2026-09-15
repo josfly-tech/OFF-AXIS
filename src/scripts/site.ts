@@ -176,6 +176,29 @@ contactForm?.addEventListener('submit', async (event) => {
 
 const consentBanner = document.querySelector<HTMLElement>('[data-consent-banner]');
 const analyticsId = body.dataset.gaId ?? '';
+let savedConsent: string | null = null;
+try {
+  const storedConsent = localStorage.getItem('oa-analytics-consent');
+  savedConsent = storedConsent === 'granted' || storedConsent === 'denied' ? storedConsent : null;
+} catch {
+  savedConsent = null;
+}
+
+const analyticsWindow = window as typeof window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void };
+analyticsWindow.dataLayer = analyticsWindow.dataLayer ?? [];
+analyticsWindow.gtag = analyticsWindow.gtag ?? function (..._args: unknown[]) {
+  analyticsWindow.dataLayer?.push(arguments);
+};
+
+const consentSettings = (analyticsStorage: 'granted' | 'denied') => ({
+  analytics_storage: analyticsStorage,
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+});
+
+analyticsWindow.gtag('consent', 'default', consentSettings(savedConsent === 'granted' ? 'granted' : 'denied'));
+
 const loadAnalytics = () => {
   if (!analyticsId || document.querySelector(`script[data-ga="${analyticsId}"]`)) return;
   const script = document.createElement('script');
@@ -183,21 +206,15 @@ const loadAnalytics = () => {
   script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(analyticsId)}`;
   script.dataset.ga = analyticsId;
   document.head.append(script);
-  const analyticsWindow = window as typeof window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void };
-  analyticsWindow.dataLayer = analyticsWindow.dataLayer ?? [];
-  analyticsWindow.gtag = (...args: unknown[]) => analyticsWindow.dataLayer?.push(args);
-  analyticsWindow.gtag('js', new Date());
-  analyticsWindow.gtag('config', analyticsId, { anonymize_ip: true });
+  analyticsWindow.gtag?.('js', new Date());
+  analyticsWindow.gtag?.('config', analyticsId, {
+    allow_google_signals: false,
+    allow_ad_personalization_signals: false,
+  });
 };
 
-let savedConsent: string | null = null;
-try {
-  savedConsent = localStorage.getItem('oa-analytics-consent');
-} catch {
-  savedConsent = null;
-}
-if (savedConsent === 'granted') loadAnalytics();
-else if (!savedConsent && consentBanner) consentBanner.hidden = false;
+loadAnalytics();
+if (!savedConsent && consentBanner) consentBanner.hidden = false;
 
 consentBanner?.addEventListener('click', (event) => {
   const button = (event.target as Element).closest<HTMLButtonElement>('[data-consent]');
@@ -209,7 +226,7 @@ consentBanner?.addEventListener('click', (event) => {
     // The preference remains session-only when storage is unavailable.
   }
   consentBanner.hidden = true;
-  if (value === 'granted') loadAnalytics();
+  analyticsWindow.gtag?.('consent', 'update', consentSettings(value));
 });
 
 document.querySelector<HTMLButtonElement>('[data-reset-consent]')?.addEventListener('click', () => {
@@ -218,5 +235,6 @@ document.querySelector<HTMLButtonElement>('[data-reset-consent]')?.addEventListe
   } catch {
     // The banner can still be shown for the current page.
   }
+  analyticsWindow.gtag?.('consent', 'update', consentSettings('denied'));
   if (consentBanner) consentBanner.hidden = false;
 });

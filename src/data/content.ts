@@ -177,7 +177,7 @@ export const siteContent = {
     privacy: 'Privacy policy',
     legal: 'Legal notice',
     consent: {
-      text: 'OFF AXIS uses audience measurement only with your consent.',
+      text: 'OFF AXIS measures visits without cookies. Measurement cookies are used only with your consent.',
       accept: 'Accept',
       reject: 'Decline',
       learn: 'Read our privacy policy',
@@ -359,7 +359,7 @@ export const siteContent = {
     privacy: 'Politique de confidentialité',
     legal: 'Mentions légales',
     consent: {
-      text: 'OFF AXIS utilise la mesure d’audience uniquement avec votre accord.',
+      text: 'OFF AXIS mesure les visites sans cookie. Les cookies de mesure sont utilisés uniquement avec votre accord.',
       accept: 'Accepter',
       reject: 'Refuser',
       learn: 'Lire notre politique de confidentialité',
